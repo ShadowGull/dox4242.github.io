@@ -50,6 +50,9 @@
                 console.log(err);
                 return;
             }
+            if (this.save.ascension >= 2) {
+                $('.nav-pills a[href="#tab-raw"]').click();
+            }
             View.result.state = this.save.artifactRngState;
             View.result.excavations = this.save.excavations;
 
@@ -235,7 +238,7 @@
                         showLines: false,
                         title: {
                             display: true,
-                            text: 'Small RNG Values',
+                            text: 'Small Values',
                             fontSize: 16
                         },
                         legend: {
@@ -247,7 +250,7 @@
                                     position: 'bottom',
                                     scaleLabel: {
                                         display: true,
-                                        labelString: 'Number of RNG Values Ahead',
+                                        labelString: 'Number of Small Values Ahead',
                                         fontSize: 14,
                                         fontStyle: 'bold'
                                     }
@@ -256,7 +259,7 @@
                             yAxes: [{
                                     scaleLabel: {
                                         display: true,
-                                        labelString: 'RNG Value',
+                                        labelString: 'Small Value',
                                         fontSize: 14,
                                         fontStyle: 'bold'
                                     }

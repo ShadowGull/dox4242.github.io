@@ -202,10 +202,10 @@ var Artifacts = [
       return util.save.upgrade_owned(save,469) && save.faction == 0 && save.prestigeFaction == -1;
     },
     random: function(save) {
-      return save.spells[6].c / 4000000;
+      return Math.pow(save.spells[6].c, 1.5) / 10000000;
     },
     required: function(value) {
-      return Math.ceil(value * 4000000);
+      return Math.ceil(Math.pow(value * 10000000,2.0/3.0));
     },
     display: function(value) {
       return value + ' Fairy Chanting Cast' + (value>1?'s':'');;
@@ -263,16 +263,16 @@ var Artifacts = [
     name: 'Divine Sword',
     id: 135,
     fixed: function(save) {
-      return util.save.upgrade_owned(save,469) && save.faction == 2 && save.prestigeFaction == -1 && save.stats[99].statsReset >= 3;
+      return util.save.upgrade_owned(save,469) && save.faction == 2 && save.prestigeFaction == -1 && util.save.stat(save, 52, 2) >= 14400;
     },
     random: function(save) {
-      return (save.stats[99].statsReset) / 6000;
+      return (util.save.stat(save, 52, 2)) / 8640000;
     },
     required: function(value) {
-      return Math.ceil(value * 6000);
+      return Math.ceil(value * 8640000);
     },
     display: function(value) {
-      return value + ' Consecutive Angel Affiliation' + (value>1?'s':'');
+      return util.render.time(value) + ' All Time Angel Time';
     }
   },
   {
@@ -327,16 +327,16 @@ var Artifacts = [
     name: 'Jaw Bone',
     id: 142,
     fixed: function(save) {
-      return util.save.upgrade_owned(save,469) && save.faction == 4 && save.prestigeFaction == -1&& util.save.stat(save, 45, 1) >= 86400;
+      return util.save.upgrade_owned(save,469) && save.faction == 4 && save.prestigeFaction == -1 && save.spells[15].active0 >= 3600;
     },
     random: function(save) {
-      return util.save.stat(save, 45, 1) / 86400000;
+      return save.spells[15].active0 / 3600000;
     },
     required: function(value) {
-      return Math.ceil(value * 86400000);
+      return Math.ceil(value * 3600000);
     },
     display: function(value) {
-      return util.render.time(value) + ' Total Offline Time';
+      return util.render.time(value) + ' Night Time Activity Time this Era';
     }
   },
   {
@@ -353,16 +353,16 @@ var Artifacts = [
     name: 'Demon Horn',
     id: 140,
     fixed: function(save) {
-      return util.save.upgrade_owned(save,469) && save.faction == 5 && save.prestigeFaction == -1 && save.stats[100].statsReset >= 3;
+      return util.save.upgrade_owned(save,469) && save.faction == 5 && save.prestigeFaction == -1 && util.save.stat(save, 55, 2) >= 14400;
     },
     random: function(save) {
-      return (save.stats[100].statsReset) / 6000;
+      return (util.save.stat(save, 55, 2)) / 8640000;
     },
     required: function(value) {
-      return Math.ceil(value * 6000);
+      return Math.ceil(value * 8640000);
     },
     display: function(value) {
-      return value + ' Consecutive Demon Affiliation' + (value>1?'s':'');
+      return util.render.time(value) + ' All Time Demon Time';
     }
   },
   {
@@ -385,16 +385,16 @@ var Artifacts = [
     name: 'Titan Shield',
     id: 155,
     fixed: function(save) {
-      return util.save.upgrade_owned(save,469) && save.faction == 6 && save.prestigeFaction == -1 && util.save.stat(save, 1) >= 36000;
+      return util.save.upgrade_owned(save,469) && save.faction == 6 && save.prestigeFaction == -1 && util.save.stat(save, 1) >= 7200;
     },
     random: function(save) {
       return util.save.stat(save, 1) / 18000000;
     },
     required: function(value) {
-      return Math.max(Math.ceil(value * 18000000), 36000);
+      return Math.ceil(value * 18000000);
     },
     display: function(value) {
-      return util.render.time(value) + ' Playtime'
+      return util.render.time(value) + ' Time this Era'
     }
   },
   {
@@ -675,7 +675,7 @@ var Artifacts = [
     reincarnation: 16,
     fixed: function(save) {
       var h = new Date().getHours();
-      return save.reincarnation >= this.reincarnation && h >= 5 && h <= 7 && util.save.upgrade_owned(save,469);
+      return save.reincarnation >= this.reincarnation && h >= 5 && h <= 10 && util.save.upgrade_owned(save,469);
     },
     nocache: true,
     random: function(save, e) {
@@ -776,7 +776,7 @@ var Artifacts = [
       return Math.ceil(value * 100000000);
     },
     display: function(value) {
-      return util.render.time(value) + ' Playtime'
+      return util.render.time(value) + ' Time this Era'
     }
   },
   {
@@ -817,10 +817,10 @@ var Artifacts = [
       return save.ascension >= 2;
     },
     random: function(save) {
-      return util.save.fc_chance(save) / 500000000000000000;
+      return Math.pow(Math.log(1 + util.save.fc_chance(save)),1.5) / 500000;
     },
     required: function(value) {
-      return Math.ceil(value * 500000000000000000);
+      return Math.ceil(Math.pow(Math.E,Math.pow(value * 500000,2.0/3.0)));
     },
     display: function(value) {
       return util.render.sci(value) + '% Faction Coin Chance';
@@ -834,10 +834,10 @@ var Artifacts = [
       return save.faction == 8 && save.reincarnation >= this.reincarnation && save.excavations >= 2000 && util.save.trophy_owned(save,156) && util.save.trophy_owned(save,145);
     },
     random: function (save) {
-      return Math.pow(util.save.brainwaveHeadstart(save), 1.5) / 2000000000;
+      return Math.pow(util.save.brainwaveHeadstart(save), 1.5) / 100000000;
     },
     required: function (value) {
-      return Math.pow(value * 2000000000, 2 / 3);
+      return Math.pow(value * 100000000, 2 / 3);
     },
     display: function (value) {
       return util.render.time(value) + ' Brainwave headstart';
@@ -851,10 +851,10 @@ var Artifacts = [
       return save.faction == 7 && save.reincarnation >= this.reincarnation && save.excavations >= 2000 && util.save.trophy_owned(save,138) && util.save.trophy_owned(save,153);
     },
     random: function (save) {
-      return Math.pow(save.lineageLevels[7].lev, 3) / 200000000;
+      return Math.pow(save.lineageLevels[7].lev, 3) / 100000000;
     },
     required: function (value) {
-      return Math.pow(value * 200000000, 1 / 3);
+      return Math.pow(value * 100000000, 1 / 3);
     },
     display: function (value) {
       return 'Level ' + Math.ceil(value) + ' Druid Lineage';
@@ -870,10 +870,10 @@ var Artifacts = [
     random: function (save) {
       var exchanges = util.save.stat(save, 24);
 
-      return Math.pow(exchanges, 2) / 150000000000;
+      return Math.pow(exchanges, 2) / 50000000000;
     },
     required: function(value, save) {
-      var exchanges = Math.ceil(Math.pow(value * 150000000000, 0.5));
+      var exchanges = Math.ceil(Math.pow(value * 50000000000, 0.5));
 
       return exchanges;
     },
@@ -889,32 +889,30 @@ var Artifacts = [
       return save.faction == 5 && save.reincarnation >= this.reincarnation && save.excavations >= 2000 && util.save.trophy_owned(save,134) && util.save.trophy_owned(save,140);
     },
     random: function (save) {
-      return (save.buildings[10].q - 8000) / 20000000;
+      return save.buildings[10].q / 20000000;
     },
     required: function (value) {
-      return value * 20000000 + 8000;
+      return Math.ceil(value * 20000000);
     },
     display: function (value) {
       return Math.ceil(value) + ' Hall of Legends';
     }
   },
   {
-    name: 'Dusty Coffin', // TODO: higher is better, might require rework of the entire page logic
+    name: 'Dusty Coffin',
     id: 276,
-	invertedchance: true,
     reincarnation: 100,
     fixed: function (save) {
       return save.faction == 4 && save.reincarnation >= this.reincarnation && save.excavations >= 2000 && util.save.trophy_owned(save,150) && util.save.trophy_owned(save,142);
     },
     random: function (save) {
-      var value = save.stats[1].stats;
-      return 0.01 / (30 + Math.pow(value, 1.5));
+      return util.save.stat(save, 54, 2) / 259200000;
     },
     required: function (value) {
-      return Math.floor(Math.pow((1 / (value * 100)) - 30, 1 / 1.5));
+      return Math.ceil(value * 259200000);
     },
     display: function (value) {
-      return util.render.time(~~value) + ' spent this game';
+      return value  + ' All Time Undead Time';
     }
   },
   {
@@ -925,10 +923,10 @@ var Artifacts = [
       return save.faction == 3 && save.reincarnation >= this.reincarnation && save.excavations >= 2000 && util.save.trophy_owned(save,129) && util.save.trophy_owned(save,139);
     },
     random: function (save) {
-      return (save.buildings[21].q - 8000) / 30000000;
+      return save.buildings[21].q / 50000000;
     },
     required: function (value) {
-      return value * 30000000 + 8000;
+      return Math.ceil(value * 50000000);
     },
     display: function (value) {
       return Math.ceil(value) + ' Slave Pens';
@@ -948,7 +946,7 @@ var Artifacts = [
       return value * 2592000000;
     },
     display: function (value) {
-      return util.render.time(value) + ' Angel time';
+      return util.render.time(value) + ' All Time Angel Time';
     }
   },
   {
@@ -965,7 +963,7 @@ var Artifacts = [
       return Math.pow(value * 1000000 , (1 / 4.5)) / 3;
     },
     display: function (value) {
-      return Math.ceil(value) + ' Excavation Resets this game';
+      return Math.ceil(value) + ' Excavation Resets this Era';
     }
   },
   {
@@ -976,10 +974,10 @@ var Artifacts = [
       return save.faction == 0 && save.reincarnation >= this.reincarnation && save.excavations >= 2000 && util.save.trophy_owned(save,147) && util.save.trophy_owned(save,132);
     },
     random: function (save) {
-      return (save.buildings[25].q - 8000) / 20000000;
+      return (save.buildings[25].q / 40000000);
     },
     required: function (value) {
-      return value * 20000000 + 8000;
+      return Math.ceil(value * 40000000);
     },
     display: function (value) {
       return Math.ceil(value) + ' Wizard Towers';
@@ -993,10 +991,10 @@ var Artifacts = [
       return save.prestigeFaction === 9 && save.reincarnation >= this.reincarnation && save.excavations >= 2000 && util.save.trophy_owned(save,136) && util.save.trophy_owned(save,154);
     },
     random: function (save) {
-      return util.save.assistants(save) / 100000000000;
+      return util.save.assistants(save) / 1000000000000000;
     },
     required: function (value) {
-      return value * 100000000000;
+      return value * 1000000000000000;
     },
     display: function (value) {
       return Math.ceil(value) + ' Base Assistants';
@@ -1010,10 +1008,10 @@ var Artifacts = [
       return save.prestigeFaction === 10 && save.reincarnation >= this.reincarnation && save.excavations >= 2000 && util.save.trophy_owned(save,133) && util.save.trophy_owned(save,130);
     },
     random: function (save) {
-      return Math.pow(40 * util.save.combo_strike_counter(save), 0.9) / 1000000000;
+      return Math.pow(100 * util.save.combo_strike_counter(save), 0.9) / 1000000000;
     },
     required: function (value) {
-      return Math.pow((value * 1000000000) / 40, 1 / 0.9);
+      return Math.pow((value * 1000000000) / 100, 1 / 0.9);
     },
     display: function (value) {
       return Math.ceil(value) + ' Combo Strike Counter';
@@ -1027,10 +1025,10 @@ var Artifacts = [
       return save.prestigeFaction === 12 && save.reincarnation >= this.reincarnation && save.excavations >= 2000 && util.save.trophy_owned(save,229) && util.save.trophy_owned(save,230);
     },
     random: function (save) {
-      return util.save.active_spells(save) / 250000;
+      return util.save.active_spells(save) / 200000;
     },
     required: function (value) {
-      return value * 250000;
+      return value * 200000;
     },
     display: function (value) {
       return Math.ceil(value) + ' Active Spells';
@@ -1044,10 +1042,10 @@ var Artifacts = [
       return util.save.upgrade_owned(save,749) && save.reincarnation >= this.reincarnation;
     },
     random: function (save) {
-      return 1000 / 1000000000000 ;
+      return Math.pow(Math.log(1000),3) / 23456700 ;
     },
     required: function (value) {
-      return value * 1000000000000;
+      return Math.pow(Math.E,Math.pow(value * 2356700, 1/3.0));
     },
     display: function (value) {
       return util.render.sci(value) + ' Mana per second';
@@ -1064,13 +1062,13 @@ var Artifacts = [
 	//(min(x, y, z) / 1,000 days)%, where x is Fairy Chanting spell activity time, y is Hellfire Blast spell activity time, and z is Brainwave spell activity time (all time)
       return (Math.min((save.spells[6].active0 + save.spells[6].active1 + save.spells[6].active2),
 					   (save.spells[11].active0 + save.spells[11].active1 + save.spells[11].active2),
-	                   (save.spells[2].active0 + save.spells[2].active1 + save.spells[2].active2)))  / (100000 * 86400);
+	                   (save.spells[2].active0 + save.spells[2].active1 + save.spells[2].active2)))  / (648000000);
     },
     required: function (value) {
-      return value * 100000;
+      return value * 648000000;
     },
     display: function (value) {
-      return 'At least ' + util.render.time(value * 86400) + ' activity time (all time) for each of these spells: Fairy Chanting, Hellfire Blast and Brainwave';
+      return 'At least ' + util.render.time(value) + ' activity time (all time) for each of these spells: Fairy Chanting, Hellfire Blast and Brainwave';
     }
   },
   {
@@ -1082,10 +1080,10 @@ var Artifacts = [
     },
     random: function (save) {
     // (2 * log10(1 + x) ^ 2 / 12000)%, where x is FC collected this game.
-      return Math.pow(Math.log10(1 + util.save.faction_coins(save)), 2) / 600000;
+      return Math.pow(Math.log10(1 + util.save.faction_coins(save)), 2) / 6000000;
     },
     required: function (value) {
-      return Math.pow(10,Math.sqrt(value * 600000)) - 1;
+      return Math.pow(10,Math.sqrt(value * 6000000)) - 1;
     },
     display: function (value) {
       return util.render.sci(value) + ' Faction Coins found';
@@ -1180,7 +1178,7 @@ var Artifacts = [
       return Math.pow(10,Math.pow(value*250000000,1/3));
     },
     display: function (value) {
-      return util.render.sci(value) + ' Faction Coins found (this Game)';
+      return util.render.sci(value) + ' Faction Coins found (this Era)';
     }
   },
   {
@@ -1216,7 +1214,7 @@ var Artifacts = [
       return Math.pow(10,Math.pow(value*2000000,1/3));
     },
     display: function (value) {
-      return util.render.sci(value)  + ' Clicks (This Game)';
+      return util.render.sci(value)  + ' Clicks (This Era)';
     }
   },
   {
@@ -1249,10 +1247,10 @@ var Artifacts = [
       return Math.pow(Math.log10(save.spells[18].c + 1),3) / 12500000;
     },
     required: function (value) {
-      return Math.pow(10,Math.pow(value*12500000,1/3));;
+      return Math.pow(10,Math.pow(value*12500000,1/3));
     },
     display: function (value) {
-      return util.render.sci(value) + ' Tax Collections (This Game)';
+      return util.render.sci(value) + ' Tax Collections (This Era)';
     }
   },
   {
@@ -1264,10 +1262,10 @@ var Artifacts = [
     },
     random: function(save) {
 	  //((x ^ 2.5) / 5000)%, where x is amount of consecutive days logged in
-      return (Math.pow(save.consecutiveDays,2.5)/500000);
+      return (Math.pow(save.consecutiveDays,2.5) / 250000);
     },
 	required: function (value) {
-      return Math.pow(value*500000,1/2.5);
+      return Math.pow(value * 250000,1/2.5);
     },
     display: function (value) {
       return Math.ceil(value) + ' Consecutive Days logged in';
@@ -1281,10 +1279,10 @@ var Artifacts = [
       return save.reincarnation >= this.reincarnation && save.faction == 11 && util.save.trophy_owned(save,152) && util.save.trophy_owned(save,131);
     },
     random: function(save) {
-      return (Math.floor(Math.log10(save.gems)) - 37) * (0.001);
+      return Math.pow(0.5 * Math.log10(1 + save.gems),2) / 1000000 ;
     },
 	required: function (value) {
-      return 10**(Math.ceil(value / 0.001) + 37);
+      return Math.pow(10,(2 * Math.sqrt(value * 1000000)));
     },
     display: function (value) {
       return Math.ceil(value).toPrecision(1) + ' Gems';
@@ -1304,7 +1302,7 @@ var Artifacts = [
       return (value * 100000) + 10;
     },
     display: function (value) {
-      return Math.ceil(value) + ' Excavation Resets (This Game)';
+      return Math.ceil(value) + ' Excavation Resets (This Era)';
     }
   },
   {
@@ -1338,7 +1336,7 @@ var Artifacts = [
       return Math.pow(10, Math.pow((value * 5000000),1/3));
     },
     display: function (value) {
-      return Math.ceil(value) + ' Mana Produced (This Game)';
+      return Math.ceil(value) + ' Mana Produced (This Era)';
     }
   },
   {
@@ -1355,7 +1353,7 @@ var Artifacts = [
       return Math.pow(10, Math.pow((value * 1000000),1/3));
     },
     display: function (value) {
-      return Math.ceil(value) + ' Clicks (This Game)';
+      return Math.ceil(value) + ' Clicks (This Era)';
     }
   },
   {
@@ -1448,13 +1446,13 @@ var Artifacts = [
       return save.faction == 0 && save.ascension >= 4 && save.excavations >= 10000;
     },
     random: function(save) {
-      return Math.log10(util.save.stat(save, 15)) / 800000
+      return Math.log(util.save.stat(save, 15)) / 800000
     },
 	required: function (value) {
-      return (Math.pow(10,(value * 800000)));
+      return (Math.pow(Math.e,(value * 800000)));
     },
     display: function (value) {
-      return util.render.sci(value) + ' Mana Produced (This Game)';
+      return util.render.sci(value) + ' Mana Produced (This Era)';
     }
   },
   {
@@ -1465,10 +1463,10 @@ var Artifacts = [
       return save.faction == 1 && save.ascension >= 4 && save.excavations >= 10000;
     },
     random: function(save) {
-      return (Math.log10(util.save.fc_chance(save))) / 800000;
+      return (Math.log(util.save.fc_chance(save))) / 800000;
     },
 	required: function (value) {
-      return (Math.pow(10,(value * 800000)));
+      return (Math.pow(Math.E,(value * 800000)));
     },
     display: function (value) {
       return util.render.sci(value) + '%  Faction Coin Chance';
@@ -1482,10 +1480,10 @@ var Artifacts = [
       return save.faction == 2 && save.ascension >= 4 && save.excavations >= 10000;
     },
     random: function(save) {
-      return util.save.active_spells / 400000;
+      return util.save.active_spells / 200000;
     },
 	required: function (value) {
-      return value * 4000000;
+      return value * 2000000;
     },
     display: function (value) {
       return Math.ceil(value) + ' Active Spells';
@@ -1499,13 +1497,13 @@ var Artifacts = [
       return save.faction == 3 && save.ascension >= 4 && save.excavations >= 10000;
     },
     random: function(save) {
-      return (Math.log10(save.spells[18].c + 1)) / 800000;
+      return (Math.log(save.spells[18].c + 1)) / 800000;
     },
 	required: function (value) {
-      return (Math.pow(10,(value * 800000)));
+      return (Math.pow(Math.E,(value * 800000)));
     },
     display: function (value) {
-      return util.render.sci(value) + ' Tax Collection Casts (This Game)';
+      return util.render.sci(value) + ' Tax Collection Casts (This Era)';
     }
   }, 
   {
@@ -1534,13 +1532,13 @@ var Artifacts = [
       return save.faction == 5 && save.ascension >= 4 && save.excavations >= 10000;
     },
     random: function(save) {
-      return (save.spells[1].c + save.spells[8].c + save.spells[15].c + save.spells[11].c + save.spells[4].c) / 100000000;
+      return (save.spells[1].c + save.spells[8].c + save.spells[15].c + save.spells[11].c + save.spells[4].c) / 10000000;
     },
 	required: function (value) {
-      return value * 100000000;
+      return value * 10000000;
     },
     display: function (value) {
-      return util.render.sci(value) + ' Evil Spells (This Game)';
+      return util.render.sci(value) + ' Evil Spells (This Era)';
     }
   },
   {
@@ -1551,13 +1549,13 @@ var Artifacts = [
       return save.faction == 6 && save.ascension >= 4 && save.excavations >= 10000;
     },
     random: function(save) {
-      return save.spells[13].active0 / 100000000;
+      return save.spells[13].active0 / 10000000;
     },
 	required: function (value) {
-      return value * 100000000;
+      return value * 10000000;
     },
     display: function (value) {
-      return util.render.time(value) + ' Lightning Strike Activity Time (This Game)';
+      return util.render.time(value) + ' Lightning Strike Activity Time (This Era)';
     }
   },
   {
@@ -1585,13 +1583,13 @@ var Artifacts = [
       return save.faction == 8 && save.ascension >= 4 && save.excavations >= 10000;
     },
     random: function(save) {
-      return save.stats[39].statsReset / 1000000;
+      return save.stats[39].statsReset / 800000;
     },
 	required: function (value) {
-      return value * 1000000;
+      return value * 800000;
     },
     display: function (value) {
-      return util.render.time(value) + ' Longest Session This R (Excluding This Game)';
+      return util.render.time(value) + ' Longest Session This R (Excluding This Era)';
     }
   },
   {
@@ -1643,6 +1641,23 @@ var Artifacts = [
     },
     display: function (value) {
       return util.render.sci(value) + ' Max Assistants This Reincarnation';
+    }
+  },
+  {
+    name: 'Mask of Scorch\'Rah',
+    id: 386,
+	reincarnation: 255,
+    fixed: function(save) {
+      return save.reincarnation >= this.reincarnation && save.excavations >= 50000 && (util.save.upgrade_owned(save, 213404) || util.save.upgrade_owned(save, 213400) && util.save.upgrade_owned(save, 213403));
+    },
+    random: function(save) {
+      return util.save.stat(save, 1) / 100000000;
+    },
+    required: function(value) {
+      return Math.ceil(value * 100000000);
+    },
+    display: function (value) {
+      return util.render.time(value) + ' Time this Era';
     }
   }
 ];
