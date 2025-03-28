@@ -160,7 +160,7 @@ var Artifacts = [
       return Math.ceil(value * 500000000);
     },
     display: function(value) {
-      return value + ' Total Treasure Click' + (value>1?'s':'');
+      return value + ' Productive Clicks This Reincarnation';
     }
   },
   {
@@ -240,7 +240,7 @@ var Artifacts = [
       return Math.ceil(value * 300000000);
     },
     display: function(value) {
-      return value + ' Treasure Click' + (value>1?'s':'');
+      return value + ' Productive Clicks';
     }
   },
   {
@@ -288,7 +288,7 @@ var Artifacts = [
       return Math.ceil(value * 5000000000);
     },
     display: function(value) {
-      return value + ' Total Faction Coins Found';
+      return value + ' Faction Coins Found This Reincarnation';
     }
   },
   {
@@ -472,7 +472,7 @@ var Artifacts = [
       return Math.ceil(value * 2500000);
     },
     display: function(value) {
-      return value + ' Treasure Click' + (value>1?'s':'');
+      return value + ' Productive Clicks';
     }
   },
   {
@@ -1441,7 +1441,7 @@ var Artifacts = [
   {
     name: 'Glowing Wing',
     id: 364,
-	reincarnation: 220,
+	reincarnation: 225,
     fixed: function(save) {
       return save.faction == 0 && save.ascension >= 4 && save.excavations >= 10000;
     },
@@ -1458,7 +1458,7 @@ var Artifacts = [
   {
     name: 'Sylvan Mirror',
     id: 369,
-	reincarnation: 220,
+	reincarnation: 225,
     fixed: function(save) {
       return save.faction == 1 && save.ascension >= 4 && save.excavations >= 10000;
     },
@@ -1475,7 +1475,7 @@ var Artifacts = [
   {
     name: 'Solid Cloud',
     id: 365,
-	reincarnation: 220,
+	reincarnation: 225,
     fixed: function(save) {
       return save.faction == 2 && save.ascension >= 4 && save.excavations >= 10000;
     },
@@ -1492,7 +1492,7 @@ var Artifacts = [
   {
     name: 'Orc Fang Necklace',
     id: 366,
-	reincarnation: 220,
+	reincarnation: 225,
     fixed: function(save) {
       return save.faction == 3 && save.ascension >= 4 && save.excavations >= 10000;
     },
@@ -1509,7 +1509,7 @@ var Artifacts = [
   {
     name: 'Blood Chalice',
     id: 371,
-	reincarnation: 220,
+	reincarnation: 225,
     fixed: function(save) {
       return save.faction == 4 && save.ascension >= 4 && save.excavations >= 10000;
     },
@@ -1527,7 +1527,7 @@ var Artifacts = [
   {
     name: 'Demon Tail',
     id: 372,
-	reincarnation: 220,
+	reincarnation: 225,
     fixed: function(save) {
       return save.faction == 5 && save.ascension >= 4 && save.excavations >= 10000;
     },
@@ -1544,7 +1544,7 @@ var Artifacts = [
   {
     name: 'Frozen Lightning',
     id: 363,
-	reincarnation: 220,
+	reincarnation: 225,
     fixed: function(save) {
       return save.faction == 6 && save.ascension >= 4 && save.excavations >= 10000;
     },
@@ -1561,7 +1561,7 @@ var Artifacts = [
   {
     name: 'Primal Leaf',
     id: 367,
-	reincarnation: 220,
+	reincarnation: 225,
     fixed: function(save) {
       return save.faction == 7 && save.ascension >= 4 && save.excavations >= 10000;
     },
@@ -1578,7 +1578,7 @@ var Artifacts = [
   {
     name: 'The Blackest Ink',
     id: 370,
-	reincarnation: 220,
+	reincarnation: 225,
     fixed: function(save) {
       return save.faction == 8 && save.ascension >= 4 && save.excavations >= 10000;
     },

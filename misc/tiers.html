@@ -19,31 +19,11 @@
     <div class='panel panel-primary'>
       <div class='panel-body'>
         <div class='input-group panelSaveInput'>
-          <label id='saveInputLabel' class='input-group-addon' for='saveInput'>Input Save <a data-toggle='popover' data-trigger='hover' data-placement='bottom' data-content='Export your save from Realm Grinder and paste it in this field to view a variety of stats that are not shown in-game.'>(?)</a></label>
-          <input id='saveInput' class='form-control' type='text' name='saveInput' value=''>
-          <div class='input-group-btn'>
-            <button id='doReEnter' class='btn btn-success' type='button'>Re-Enter save</button>
-            <button id='doSaveCopy' class='btn btn-info' type='button'>Copy save</button>
-            <button id='doSaveClear' class='btn btn-danger' type='button'>Clear save</button>
+          Hover over the Arcane Brilliance trophy ingame!
           </div>
         </div>
       </div>
     </div>
-	<ul v-if='unlockedTiers > -1'>
-		Total unlocked tiers: {{unlockedTiers}}
-	</ul>
-    <ul>
-      <li v-for='s in allSpells'>
-        {{s.name}}: {{s.unlocked + 1}} ({{s.text}})
-      </li>
-    </ul>
-	<ul v-if='timeLine != ""'>
-		Spell Tiering Timeline: 
-		<p></p>
-		<li v-for='line in timeLine'>
-        {{line}}
-      </li>
-	</ul>
   </div>
 </body>
 </html>

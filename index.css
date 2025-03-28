@@ -9,6 +9,11 @@
 	ol > li {
 		cursor: pointer;
 	}
+    
+    table th {
+        min-width: 175px;
+    }
+    
 	.highlight {
 		font-weight: bold;
 	}
