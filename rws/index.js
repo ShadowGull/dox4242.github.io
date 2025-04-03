@@ -14,10 +14,12 @@
     var miracleRNG = null;
 
     var breathRNG = null;
-    var breathNames = ['Red', 'Green', 'Blue', 'White', 'Black'];
+    var breathNames = ['Red', 'Green', 'Blue', 'White', 'Black', 'Yellow'];
     var breathTier = 1;
+    var breathAscension = 1;
     var maelstromRNG = null;
-    var maelstromTargets = 3;
+    var baseMaelstromTargets = 2;
+    var maelstromTargets = 0;
     var maelstromEffects = ['Mana Produced', 'Trophies Unlocked', 'Faction Coins found', 'Amount of Assistants'];
 
     var limitedWishRNG = null;
@@ -178,6 +180,9 @@
         {
             breathTier *= 2;
         }
+        if (save.ascension > 0) {
+            breathAscension = save.ascension;
+        }
 
         $('#breathMessage').html('<b>Dragon\'s Breath</b><br>Your RNG state is: ' + breathRNG.state + '.');
         $('#breathForecast').html('<b>Forecast</b><br><ol></ol>')
@@ -230,10 +235,14 @@
     var forecastBreathMore = function (e) {
         if (breathRNG) {
             for (var i = 0; i < 10; i++) {
-                var hits = [0, 0, 0, 0, 0];
+                var hits = [0, 0, 0, 0, 0, 0];
                 var textResult = [];
                 //slice() clones the array
                 var eligible = breathNames.slice();
+                if(breathAscension == 1) {
+                    hits.pop();
+                    eligible.pop();
+                }
                 for (var c = 0; c < breathTier; c++) {
                     var len = eligible.length;
                     var breathColor = breathRNG.nextIntRange(0, len - 1);
@@ -282,8 +291,12 @@
 
         // Create the RNG and get the initial forecast
         maelstromRNG = new PM_PRNG(save.spells[27].s);
+        maelstromTargets = baseMaelstromTargets;
+        for (var i = 0; i < 4; i++) maelstromTargets += util.save.upgrade_owned(save, 402701 + i) ? 1 : 0;
 
-        $('#maelstromMessage').html('<b>Maelstrom</b><br>Your RNG state is: ' + maelstromRNG.state + '.');
+        $('#maelstromMessage').html('<b>Maelstrom</b><br>Your RNG state is: ' + maelstromRNG.state + '.')
+        .append('<br><b>Warning:</b> This forecast assumes you have enough mana to cast Maelstrom at your maximum tier every time the duration run outs, without casting any other tiers in-between. ')
+        .append('If you cannot do this, this forecast will not be accurate.');
         $(maelstromForecastSelector).html('<b>Forecast</b><br><ol></ol>')
             .append($('<button class="btn btn-link" type="button" />').html('Give me a longer Forecast').on('click', forecastMaelstromMore));
 
@@ -463,8 +476,7 @@
         // Create the RNG and get the initial forecast
         catalystRNG = new PM_PRNG(save.spells[31].s);
 
-        //check if djinn challenge 3 is active
-        catalystTargets = util.save.challenge_active(save, 991) ? 2 : 1;
+        catalystTargets = 2;
         //filter out already owned spells
         catalystEligibleEffects = catalystEffects.filter(spell => !util.save.hasSpell(save, spell));
         //ugh2
