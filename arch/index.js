@@ -69,7 +69,7 @@
             }
             View.raw.sv = "";
             $('.artifactviewer').show();
-            $('.viewer-results').empty().html("Click on a value above to see available artifact requirements for that value.");
+            $('.viewer-results').empty().html("Click on a dot to see available artifact requirements for that value. <b>Lower is better!</b>");
             $('#override-reincarnation').val(this.save.reincarnation);
 
         }
