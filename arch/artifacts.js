@@ -1414,7 +1414,7 @@ var Artifacts = [
       return (Math.pow(0.5 * Math.log(util.save.assistants(save),3))) / 2000000;
     },
 	required: function (value) {
-      return (Math.pow(Math.e, 2 * Math.pow((value * 2000000),1/3)));
+      return (Math.pow(Math.E, 2 * Math.pow((value * 2000000),1/3)));
     },
     display: function (value) {
       return Math.ceil(value) + ' Assistants';
@@ -1445,7 +1445,7 @@ var Artifacts = [
       return Math.log(util.save.stat(save, 15)) / 800000
     },
 	required: function (value) {
-      return (Math.pow(Math.e,(value * 800000)));
+      return (Math.pow(Math.E,(value * 800000)));
     },
     display: function (value) {
       return util.render.sci(value) + ' Mana Produced (This Era)';
