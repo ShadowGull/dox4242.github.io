@@ -36,6 +36,11 @@
 
     var DJC4RNG = null;
     var DJC4Hits = [[88, 88, 888], [88, 888, 88], [88, 88, 888], [88, 888, 88], [888, 88, 88], [888, 88, 88]];
+    
+    var MCC2RNG = null;
+    var MCC2Lineages = ["Fairy Lineage","Elven Lineage","Angel Lineage","Goblin Lineage","Demon Lineage","Undead Lineage","Titan Lineage","Faceless Lineage","Druid Lineage","Dwarve nLineage","Drow Lineage","Dragon Lineage","Archon Lineage","Djinn Lineage","Makers Lineage"];
+    var MCC2Allowed = [];
+    
     // Refresh the entire forecast
     var forecast = function (saveStr) {
         buildingsOwned = [];
@@ -47,8 +52,10 @@
         maelstromRNG = null;
         limitedWishRNG = null;
         catalystRNG = null;
+        DJC4RNG = null;
+        MCC2RNG = null;
         breathTier = 1;
-        $('#lightningMessage, #lightningForecast, #miracleMessage, #miracleForecast, #breathMessage, #breathForecast, #maelstromMessage, #maelstromForecast, #limitedWishMessage, #limitedWishForecast, #catalystMessage, #catalystForecast, #catalystCurrent, #DJC4Message, #DJC4Forecast').html('');
+        $('#lightningMessage, #lightningForecast, #miracleMessage, #miracleForecast, #breathMessage, #breathForecast, #maelstromMessage, #maelstromForecast, #limitedWishMessage, #limitedWishForecast, #catalystMessage, #catalystForecast, #catalystCurrent, #DJC4Message, #DJC4Forecast, #MCC2Message, #MCC2Forecast').html('');
 
         var save = SaveHandler.Decode(saveStr);
         window.decoded = save;
@@ -79,6 +86,7 @@
         forecastLimitedWish(save);
         forecastCatalyst(save);
         forecastDJC4(save);
+        forecastMCC2(save);
     };
 
     // Add the Lightning forecast
@@ -528,7 +536,40 @@
                 $('#DJC4Forecast > ol').append(li);
             }
         }
-    }
+    };
+    
+    var forecastMCC2 = function (save) {
+        if (!(util.save.challenge_active(save, 1064))) {
+            $('#MCC2Message').html('<b>Chaos Madness</b><br>I\'m not MAD, I\'m just sad :(');
+            $('#MCC2Forecast').html('<b>Forecast</b><br>No Chaos Madness.');
+            return;
+        }
+        MCC2RNG = new PM_PRNG(save.spells[32].s);
+        //Must be done like this because druid and faceless have reversed positions in code.
+        var LineageOrder = ["Fairy Lineage","Elven Lineage","Angel Lineage","Goblin Lineage","Demon Lineage","Undead Lineage","Titan Lineage","Druid Lineage","Faceless Lineage","Dwarven Lineage","Drow Lineage",null,"Dragon Lineage","Archon Lineage","Djinn Lineage","Makers Lineage"];
+        MCC2Allowed = [];
+        for (var i = 0; i < 16; ++i) {
+            //exception for merc lineage
+            if (i == 11) continue;
+            if (save.lineageFaction == i || save.combinationBL == i) continue;
+            MCC2Allowed.push(LineageOrder[i]);
+        }
+        $('#MCC2Message').html('<b>Chaos Madness</b><br>Your RNG state is: ' + MCC2RNG.state + '.');
+        $('#MCC2Forecast').html('<b>Forecast</b><br><ol></ol>')
+            .append($('<button class="btn btn-link" type="button" />').html('Give me a longer Forecast').on('click', forecastMCC2More));
+        forecastMCC2More(save);
+    };
+    //assistants, gem production, max mana
+    var forecastMCC2More = function () {
+        if (MCC2RNG) {
+            for (var i = 0; i < 10; ++i) {
+                var hit = MCC2Allowed[MCC2RNG.nextIntRange(0, MCC2Allowed.length - 1)];
+                var textResult = hit;
+                var li = $('<li />').html(textResult);;
+                $('#MCC2Forecast > ol').append(li);
+            }
+        }
+    };
 
     $(function () {
 
