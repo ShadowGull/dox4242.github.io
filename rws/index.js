@@ -38,7 +38,7 @@
     var DJC4Hits = [[88, 88, 888], [88, 888, 88], [88, 88, 888], [88, 888, 88], [888, 88, 88], [888, 88, 88]];
     
     var MCC2RNG = null;
-    var MCC2Lineages = ["Fairy Lineage","Elven Lineage","Angel Lineage","Goblin Lineage","Demon Lineage","Undead Lineage","Titan Lineage","Faceless Lineage","Druid Lineage","Dwarve nLineage","Drow Lineage","Dragon Lineage","Archon Lineage","Djinn Lineage","Makers Lineage"];
+    var MCC2Lineages = ["Fairy Lineage","Elven Lineage","Angel Lineage","Goblin Lineage","Demon Lineage","Undead Lineage","Titan Lineage","Faceless Lineage","Druid Lineage","Dwarven Lineage","Drow Lineage","Dragon Lineage","Archon Lineage","Djinn Lineage","Makers Lineage"];
     var MCC2Allowed = [];
     
     // Refresh the entire forecast
@@ -545,12 +545,11 @@
             return;
         }
         MCC2RNG = new PM_PRNG(save.spells[32].s);
-        //Must be done like this because druid and faceless have reversed positions in code.
-        var LineageOrder = ["Fairy Lineage","Elven Lineage","Angel Lineage","Goblin Lineage","Demon Lineage","Undead Lineage","Titan Lineage","Druid Lineage","Faceless Lineage","Dwarven Lineage","Drow Lineage",null,"Dragon Lineage","Archon Lineage","Djinn Lineage","Makers Lineage"];
+        //Must be done like this because of weird druid/faceless and undead/demon position in code
+        var LineageOrder = ["Fairy Lineage","Elven Lineage","Angel Lineage","Goblin Lineage","Undead Lineage","Demon Lineage","Titan Lineage","Druid Lineage","Faceless Lineage","Dwarven Lineage","Drow Lineage",null,"Dragon Lineage","Archon Lineage","Djinn Lineage","Makers Lineage"];
+        var LineageOrderID = [0,1,2,3,5,4,6,8,7,9,10,12,13,14,15];
         MCC2Allowed = [];
-        for (var i = 0; i < 16; ++i) {
-            //exception for merc lineage
-            if (i == 11) continue;
+        for (var i of LineageOrderID) {
             if (save.lineageFaction == i || save.combinationBL == i) continue;
             MCC2Allowed.push(LineageOrder[i]);
         }

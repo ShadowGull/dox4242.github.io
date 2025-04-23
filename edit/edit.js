@@ -903,6 +903,204 @@
     	}
       }
     });
+    
+    Vue.component('widget-faction-upgrade-header', {
+      template: '<tr>'
+      + '<th><span class="statheader">Faction</span></th>'
+      + '<th><span class="statheader">1</span></th>'
+      + '<th><span class="statheader">2</span></th>'
+      + '<th><span class="statheader">3</span></th>'
+      + '<th><span class="statheader">4</span></th>'
+      + '<th><span class="statheader">5</span></th>'
+      + '<th><span class="statheader">6</span></th>'
+      + '<th><span class="statheader">7</span></th>'
+      + '<th><span class="statheader">8</span></th>'
+      + '<th><span class="statheader">9</span></th>'
+      + '<th><span class="statheader">Heritage</span></th>'
+      + '<th><span class="statheader">10</span></th>'
+      + '<th><span class="statheader">11</span></th>'
+      + '<th><span class="statheader">12</span></th>'
+      + '<th><span class="statheader">Advanced Heritage</span></th>'
+      + '</tr>'
+    });
+    
+    Vue.component('widget-faction-upgrade', {
+      props: {
+        'upgrades': Object,
+        'name': String,
+        'b1_id': String,
+        'b2_id': String,
+        'b3_id': String,
+        's1_id': String,
+        's2_id': String,
+        's3_id': String,
+        'g1_id': String,
+        'g2_id': String,
+        'g3_id': String,
+        'd1_id': String,
+        'd2_id': String,
+        'd3_id': String,
+        'nh_id': String,
+        'ah_id': String,
+        hideAh: {
+          type: Boolean,
+          default: function() { return false; }
+        },
+      },
+      template: '<tr>'
+      + '<th><span class="statname">{{name}}</span></th>'
+      + '<td><input type="checkbox" v-model="b1" number></input></td>'
+      + '<td><input type="checkbox" v-model="b2" number></input></td>'
+      + '<td><input type="checkbox" v-model="b3" number></input></td>'
+      + '<td><input type="checkbox" v-model="s1" number></input></td>'
+      + '<td><input type="checkbox" v-model="s2" number></input></td>'
+      + '<td><input type="checkbox" v-model="s3" number></input></td>'
+      + '<td><input type="checkbox" v-model="g1" number></input></td>'
+      + '<td><input type="checkbox" v-model="g2" number></input></td>'
+      + '<td><input type="checkbox" v-model="g3" number></input></td>'
+      + '<td><input type="checkbox" v-model="nh" number></input></td>'
+      + '<td><input type="checkbox" v-model="d1" number></input></td>'
+      + '<td><input type="checkbox" v-model="d2" number></input></td>'
+      + '<td><input type="checkbox" v-model="d3" number></input></td>'
+      + '<td v-show="!hideAh"><input type="checkbox" v-model="ah" number></input></td>'
+      + '</tr>',
+      methods: {
+        get: function(id) {
+          if (this.upgrades[id]) {return true; }
+          else { return false; }
+      	},
+        set: function(id,x) {
+          if (this.upgrades[id] && !x) { delete this.upgrades[id]; }
+          else if (!this.upgrades[id] && x) {
+            Vue.set(View.save.upgrades, id, {_id: id, u1: true, u2: false, u3: false, s: 0});
+          }
+        },
+        get_ah: function(id) {
+          if (this.upgrades[id] && this.upgrades[id].u1) {return true; }
+          else { return false; }
+      	},
+        set_ah: function(id,x) {
+          if (this.upgrades[id] && !x) { this.upgrades[id].u1 = false; }
+          else if ((!this.upgrades[id] || !this.upgrades[id].u1) && x) {
+            Vue.set(View.save.upgrades, id, {_id: id, u1: true, u2: false, u3: true, s: 0});
+          }
+        }
+      },
+      computed: {
+    	b1: {
+          get: function() {
+            return this.get(this.b1_id);
+      	  },
+          set: function(x) {
+            return this.set(this.b1_id,x);
+          }
+        },
+        b2: {
+          get: function() {
+            return this.get(this.b2_id);
+      	  },
+          set: function(x) {
+            return this.set(this.b2_id,x);
+          }
+        },
+        b3: {
+          get: function() {
+            return this.get(this.b3_id);
+      	  },
+          set: function(x) {
+            return this.set(this.b3_id,x);
+          }
+        },
+        s1: {
+          get: function() {
+            return this.get(this.s1_id);
+      	  },
+          set: function(x) {
+            return this.set(this.s1_id,x);
+          }
+        },
+        s2: {
+          get: function() {
+            return this.get(this.s2_id);
+      	  },
+          set: function(x) {
+            return this.set(this.s2_id,x);
+          }
+        },
+        s3: {
+          get: function() {
+            return this.get(this.s3_id);
+      	  },
+          set: function(x) {
+            return this.set(this.s3_id,x);
+          }
+        },
+        g1: {
+          get: function() {
+            return this.get(this.g1_id);
+      	  },
+          set: function(x) {
+            return this.set(this.g1_id,x);
+          }
+        },
+        g2: {
+          get: function() {
+            return this.get(this.g2_id);
+      	  },
+          set: function(x) {
+            return this.set(this.g2_id,x);
+          }
+        },
+        g3: {
+          get: function() {
+            return this.get(this.g3_id);
+      	  },
+          set: function(x) {
+            return this.set(this.g3_id,x);
+          }
+        },
+        nh: {
+          get: function() {
+            return this.get(this.nh_id);
+      	  },
+          set: function(x) {
+            return this.set(this.nh_id,x);
+          }
+        },
+        d1: {
+          get: function() {
+            return this.get(this.d1_id);
+      	  },
+          set: function(x) {
+            return this.set(this.d1_id,x);
+          }
+        },
+        d2: {
+          get: function() {
+            return this.get(this.d2_id);
+      	  },
+          set: function(x) {
+            return this.set(this.d2_id,x);
+          }
+        },
+        d3: {
+          get: function() {
+            return this.get(this.d3_id);
+      	  },
+          set: function(x) {
+            return this.set(this.d3_id,x);
+          }
+        },
+        ah: {
+          get: function() {
+            return this.get_ah(this.ah_id);
+      	  },
+          set: function(x) {
+            return this.set_ah(this.ah_id,x);
+          }
+        },
+      }
+    });
 
     Vue.component('widget-challenge-header', {
       template: '<tr>'
