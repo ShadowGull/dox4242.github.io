@@ -190,6 +190,8 @@
             <tr is='widget-stat-max' :stat.sync='save.stats[87]' hide-ab name='Max Clicks'></tr>
             <tr is='widget-stat' :stat.sync='save.stats[63]' name='Auto Clicks'></tr>
             <tr is='widget-stat-max' :stat.sync='save.stats[89]' hide-ab name='Max Auto Clicks'></tr>
+            <tr is='widget-stat-max' :stat.sync='save.stats[134]' name='Elven Luck Clicks'></tr>
+            <tr is='widget-stat-max' :stat.sync='save.stats[101]' hide-ab name='Consecutive Elven Luck Triggers'></tr>
             <tr is='widget-stat' :stat.sync='save.stats[0]' name='Gold Earned'></tr>
             <tr is='widget-stat-max' :stat.sync='save.stats[31]' name='Max Gold'></tr>
             <tr is='widget-stat' :stat.sync='save.stats[5]' name='Gold Earned by Clicking'></tr>
@@ -407,8 +409,6 @@
             <tr is='widget-stat' :stat.sync='save.stats[i.affilstat]' :name='i.name + " Affiliations"' v-for='i in factions | filterDef "affilstat"'></tr>
             <tr is='widget-stat' :stat.sync='save.stats[i.upgstat]' :name='i.name + " Upgrades Bought"' v-for='i in factions | filterDef "upgstat"'></tr>
             <tr is='widget-stat-max' :stat.sync='save.stats[13]' name='Max Upgrades Bought'></tr>
-            <tr is='widget-stat-max' :stat.sync='save.stats[101]' hide-ab name='Consecutive Elven Luck Triggers'></tr>
-            <tr is='widget-stat-max' :stat.sync='save.stats[134]' name='Elven Luck Clicks'></tr>
             <tr is='widget-stat' :stat.sync='save.stats[99]' hide-ab hide-prev-reis hide-total name='Consecutive Angel Affiliations'></tr>
             <tr is='widget-stat' :stat.sync='save.stats[100]' hide-ab hide-prev-reis hide-total name='Consecutive Demon Affiliations'></tr>
             <tr is='widget-field' :field.sync='save.goblinTimer' can-edit :colspan='5' name='Time Until Green Fingers Discount'></tr>
@@ -439,6 +439,9 @@
             <tr is='widget-faction-upgrade' :upgrades.sync='upgradesArray' hide-ah name='Djinn' b1_id='904' b2_id='896' b3_id='903' s1_id='897' s2_id='898' s3_id='899' g1_id='900' g2_id='901' g3_id='902' nh_id='923' d1_id='905' d2_id='895' d3_id='890' ></tr>
             <tr is='widget-faction-upgrade' :upgrades.sync='upgradesArray' hide-ah name='Makers' b1_id='909' b2_id='911' b3_id='910' s1_id='908' s2_id='920' s3_id='906' g1_id='918' g2_id='916' g3_id='919' nh_id='924' d1_id='921' d2_id='907' d3_id='917' ></tr>
         </table>
+        <style>
+            #tab-faction-upgrades th { text-align: center}
+        </style>
         </div>
       </div>
       <div role='tabpanel' class='tab-pane fade' id='tab-fc'>
@@ -1358,6 +1361,7 @@
             <tr is='widget-stat-max' :stat.sync='save.stats[88]' hide-ab name='Max Assistant Squishes'></tr>
             <tr is='widget-stat' :stat.sync='save.stats[125]' name='Hint Button Clicks'></tr>
             <tr is='widget-field' :field.sync='save.consecutiveDays' can-edit :colspan='5' name='Consecutive Days'></tr>
+            <tr is='widget-field' :field.sync='save.upgrades[992].s' can-edit :colspan='5' name='DJC4 RNG State'></tr>
             <tr>
               <th><span class="statname">Better Maelstrom Luck for Demons</span></th>
               <td colspan="5"><input type="checkbox" v-model="lsJoke" number></input></td>

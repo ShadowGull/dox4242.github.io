@@ -1360,10 +1360,10 @@ var Artifacts = [
       return save.reincarnation >= this.reincarnation && util.save.upgrade_owned(save,224);
     },
     random: function(save) {
-      return util.save.minSpellTime(save) / 432000000;
+      return util.save.minSpellTime(save) / 216000000;
     },
 	required: function (value) {
-      return (value * 432000000);
+      return (value * 216000000);
     },
     display: function (value) {
       return util.render.time(value) + ' minimum Spell Activity Time (This R)';
