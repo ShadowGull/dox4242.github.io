@@ -220,8 +220,9 @@
             <tr is='widget-field' :field.sync='save.kcTimer' can-edit :colspan='5' name='Time Since Last Keypress (ticks)'></tr>
             <tr is='widget-field' :field.sync='save.mTimer' can-edit :colspan='5' name='Time Since Last Mouse Motion (ticks)'></tr-->
             <tr is='widget-field-time' :field.sync='save.oTimer' can-edit :colspan='5' name='Scry Production Timer (max 4h)'></tr>
-            <tr is='widget-field-time' :field.sync='save.oTimer2' can-edit :colspan='5' name='Scry Mana Timer (max 30m)'></tr>
+            <tr is='widget-field-time' :field.sync='save.oTimer2' can-edit :colspan='5' name='Scry Mana Timer (max 4h)'></tr>
             <tr is='widget-field-time' :field.sync='save.oTimer3' can-edit :colspan='5' name='Scry Event Timer (max 4h)'></tr>
+            <tr is='widget-field-time' :field.sync='save.oTimer4' can-edit :colspan='5' name='Scry Tax Collection Timer (max 4h)'></tr>
           </table>
         </div>
       </div>
@@ -897,6 +898,7 @@
 			<tr is='widget-trophy' :trophies.sync='trophiesArray' :colspan='5' id=387 name='Colorfull Feat'></tr>
 			<tr is='widget-trophy' :trophies.sync='trophiesArray' :colspan='5' id=395 name='Eggsercise Feat'></tr>
 			<tr is='widget-trophy' :trophies.sync='trophiesArray' :colspan='5' id=403 name='The Perfect Egg Feat'></tr>
+			<tr is='widget-trophy' :trophies.sync='trophiesArray' :colspan='5' id=412 name='Platinum Egg Feat'></tr>
             <tr><td colspan='4'><center><b>Summer Event</b></center></td></tr>
             <tr is='widget-event-trophy' :trophies.sync='trophiesArray' id=120800 name='Summeraan Champion 1 Quest'></tr>
             <tr is='widget-event-trophy' :trophies.sync='trophiesArray' id=120801 name='Summeraan Champion 2 Quest'></tr>
@@ -915,6 +917,7 @@
 			<tr is='widget-trophy' :trophies.sync='trophiesArray' :colspan='5' id=390 name='Midsummer Nights Dream Feat'></tr>
 			<tr is='widget-trophy' :trophies.sync='trophiesArray' :colspan='5' id=398 name='Heat Core Feat'></tr>
 			<tr is='widget-trophy' :trophies.sync='trophiesArray' :colspan='5' id=406 name='Still Lightning Feat'></tr>
+			<tr is='widget-trophy' :trophies.sync='trophiesArray' :colspan='5' id=415 name='White Hot Magic Feat'></tr>
             <tr><td colspan='4'><center><b>Blood War Event</b></center></td></tr>
             <tr is='widget-event-trophy' :trophies.sync='trophiesArray' id=124800 name='Seraphim Champion 1 Quest'></tr>
             <tr is='widget-event-trophy' :trophies.sync='trophiesArray' id=124801 name='Seraphim Champion 2 Quest'></tr>
@@ -933,6 +936,7 @@
             <tr is='widget-trophy' :trophies.sync='trophiesArray' :colspan='5' id=396 name='Fields Of Conflict Feat'></tr>
             <tr is='widget-trophy' :trophies.sync='trophiesArray' :colspan='5' id=404 name='Unwanted Truce Feat'></tr>
 			<tr is='widget-trophy' :trophies.sync='trophiesArray' :colspan='5' id=356 name='Eternal Battle Feat'></tr>
+			<tr is='widget-trophy' :trophies.sync='trophiesArray' :colspan='5' id=413 name='10 Years War Feat'></tr>
             <tr><td colspan='4'><center><b>Goblin Invasion Event</b></center></td></tr>
             <tr is='widget-event-trophy' :trophies.sync='trophiesArray' id=125500 name='Goblin&apos;s Commander 1 Quest'></tr>
             <tr is='widget-event-trophy' :trophies.sync='trophiesArray' id=125501 name='Goblin&apos;s Commander 2 Quest'></tr>
@@ -950,6 +954,7 @@
 			<tr is='widget-trophy' :trophies.sync='trophiesArray' :colspan='5' id=389 name='Under A Green Sun Feat'></tr>
 			<tr is='widget-trophy' :trophies.sync='trophiesArray' :colspan='5' id=397 name='Debt For Life Feat'></tr>
 			<tr is='widget-trophy' :trophies.sync='trophiesArray' :colspan='5' id=405 name='Treachery Feat'></tr>
+			<tr is='widget-trophy' :trophies.sync='trophiesArray' :colspan='5' id=414 name='Bribed Army Feat'></tr>
             <tr><td colspan='4'><center><b>Halloween Event</b></center></td></tr>
             <tr is='widget-trophy' :trophies.sync='trophiesArray' :colspan='5' id=218 name='Vampire'></tr>
             <tr is='widget-trophy' :trophies.sync='trophiesArray' :colspan='5' id=216 name='Ghost'></tr>
@@ -973,6 +978,7 @@
 			<tr is='widget-trophy' :trophies.sync='trophiesArray' :colspan='5' id=392 name='Curse Of The Fallen Feat'></tr>
 			<tr is='widget-trophy' :trophies.sync='trophiesArray' :colspan='5' id=400 name='Golden Bones Feat'></tr>
 			<tr is='widget-trophy' :trophies.sync='trophiesArray' :colspan='5' id=408 name='Ghostbuster Feat'></tr>
+			<tr is='widget-trophy' :trophies.sync='trophiesArray' :colspan='5' id=417 name='Mummy? Feat'></tr>
             <tr><td colspan='4'><center><b>Ruby Shine Event</b></center></td></tr>
             <tr is='widget-trophy' :trophies.sync='trophiesArray' :colspan='5' id=271 name='Ruby Shine Feat'></tr>
             <tr><td colspan='4'><center><b>Thanksgiving Event</b></center></td></tr>
@@ -1018,6 +1024,7 @@
             <tr is='widget-trophy' :trophies.sync='trophiesArray' :colspan='5' id=391 name='Beyond The Looking Glass Feat'></tr>
             <tr is='widget-trophy' :trophies.sync='trophiesArray' :colspan='5' id=399 name='Full Spectrum Color Feat'></tr>
             <tr is='widget-trophy' :trophies.sync='trophiesArray' :colspan='5' id=407 name='Under The Rainbow'></tr>
+            <tr is='widget-trophy' :trophies.sync='trophiesArray' :colspan='5' id=416 name='Stream of Dreams'></tr>
           </table>
         </div>
       </div>
