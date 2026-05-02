@@ -1695,6 +1695,28 @@
         }
       }
     });
+    
+    Vue.component('widget-option', {
+      props: {
+        opt: Object,
+        name: String,
+        id: String,
+      },
+      template: '<tr>'
+      + '<th><span class="statname">{{name}}</span></th>'
+      + '<td><input type="checkbox" v-model="options" number></input></td>'
+      + '</tr>',
+      computed: {
+        options: {
+          get: function() {
+            return this.opt[this.id];
+          },
+          set: function(x) {
+            this.opt[this.id] = x == true ? 1 : 0;
+          }
+        }
+      }
+    });
 
     Vue.config.debug = true;
 
