@@ -80,7 +80,7 @@ var Artifacts = [
     fixed: function(save) {
       return util.save.upgrade_owned(save, 517);
     },
-    excav: 3250,
+    excav: 3000,
     random: function(save) {
       return 0.005
     }
