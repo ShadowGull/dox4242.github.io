@@ -1045,7 +1045,7 @@ var Artifacts = [
       return Math.pow(Math.log(1000),3) / 23456700 ;
     },
     required: function (value) {
-      return Math.pow(Math.E,Math.pow(value * 2356700, 1/3.0));
+      return Math.pow(Math.E,Math.pow(value * 23456700, 1/3.0));
     },
     display: function (value) {
       return util.render.sci(value) + ' Mana per second';
